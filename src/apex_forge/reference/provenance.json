@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/AAH20/Apex_Tick",
+  "commit": "1b665d3a0ec1fc106525edcece8a43b7254244e1",
+  "license": "Apache-2.0",
+  "files": {
+    "oracle.py": {
+      "upstream_path": "src/apex_tick/oracle.py",
+      "sha256": "d10bbd91505d17ae51e6e0a512ea3f209ebba279e379bea957660fdaa0093e60"
+    },
+    "apex_tick_core.sv": {
+      "upstream_path": "rtl/apex_tick_core.sv",
+      "sha256": "576cb20a09a693facc705e843c5fabc81868e84a336d2020b1d24944c0996b12"
+    }
+  }
+}

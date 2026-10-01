@@ -1,0 +1,9 @@
+Apex_ContractForge
+Copyright 2026 Ahmed Hassan
+Original project code and documentation are Apache-2.0.
+Vendored Apex_Tick oracle and RTL are Apache-2.0, Copyright 2026 Ahmed Hassan,
+from commit 1b665d3a0ec1fc106525edcece8a43b7254244e1; see reference/provenance.json.
+The RTL generation template is derived from that attributed Apex_Tick RTL.
+Third-party tools, hardware IP and benchmark materials retain their own terms.
+Apex_ULL remains separately licensed AGPL-3.0-or-later; no ULL source is copied here.
+Contact: aah@a2zsoc.com

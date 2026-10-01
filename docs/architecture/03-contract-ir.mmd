@@ -1,0 +1,26 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#0b1220","primaryColor":"#172554","primaryTextColor":"#ffffff","primaryBorderColor":"#93c5fd","secondaryColor":"#163329","secondaryTextColor":"#ffffff","tertiaryColor":"#292038","tertiaryTextColor":"#ffffff","lineColor":"#cbd5e1","textColor":"#ffffff","edgeLabelBackground":"#0b1220","clusterBkg":"#111827","clusterBorder":"#64748b","fontFamily":"Arial","fontSize":"16px"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
+flowchart TB
+    C["Contract envelope<br/>Version + semantic hash + dependency locks"]:::main
+    T["Bit-vector types<br/>Widths, signs, endian, overflow"]:::main
+    S["Bounded state<br/>8 instruments, 16 pending, one output"]:::main
+    E["Event semantics<br/>Priority, acceptance, sequence, epoch"]:::main
+    TM["Time semantics<br/>Every-cycle Tick profile or explicit-time profile"]:::warn
+    F["Fault and authority policy<br/>Hold, reconcile, reset, activate config"]:::warn
+    B["Boundary contract<br/>Normalized event or qualified wire protocol"]:::main
+    VC["Semantic validation<br/>Reject ambiguity and unsupported constructs"]:::check
+    PURE["Pure operation graph<br/>Comparisons and widened arithmetic"]:::main
+    EFFECT["Ordered effects<br/>Read, reserve, commit, transmit, retire"]:::main
+    OBS["Observable trace<br/>Ready/valid, order, rejection, authority, state"]:::store
+    HASH["Canonical semantic identity<br/>Changes invalidate comparisons and proofs"]:::check
+    C --> T & S & E & TM & F & B
+    T & S & E & TM & F & B --> VC
+    VC --> PURE & EFFECT
+    PURE --> EFFECT --> OBS
+    VC --> HASH
+
+classDef main fill:#172554,stroke:#93c5fd,color:#ffffff,stroke-width:2px;
+classDef check fill:#163329,stroke:#6ee7b7,color:#ffffff,stroke-width:2px;
+classDef warn fill:#422718,stroke:#fdba74,color:#ffffff,stroke-width:2px;
+classDef future fill:#292038,stroke:#c4b5fd,color:#ffffff,stroke-width:2px;
+classDef store fill:#1e293b,stroke:#cbd5e1,color:#ffffff,stroke-width:2px;
+linkStyle default stroke:#cbd5e1,stroke-width:2px;

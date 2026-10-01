@@ -1,0 +1,145 @@
+{
+  "status": "proposed_design_not_implementation",
+  "date": "2026-10-01",
+  "project": "Apex_ContractForge",
+  "diagrams": [
+    {
+      "name": "01-ecosystem",
+      "title": "Apex ecosystem and proposed ContractForge connections",
+      "source": "01-ecosystem.mmd",
+      "render": "01-ecosystem.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "993eb7cc81f52d1d82ce8c3527c12c9ff42d5a9d49a87b532a345eea2bec8da6"
+    },
+    {
+      "name": "02-compiler",
+      "title": "Compiler architecture and qualification loop",
+      "source": "02-compiler.mmd",
+      "render": "02-compiler.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "32028a70a49b2150ee5877868e94a09439175e567f75e4023c48e6879e6db839"
+    },
+    {
+      "name": "03-contract-ir",
+      "title": "Contract semantics and intermediate representation",
+      "source": "03-contract-ir.mmd",
+      "render": "03-contract-ir.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "dae260d781ee4175601cdd8a137b394adb1a6d3c1ec05f89190d2acdeb2a2b8f"
+    },
+    {
+      "name": "04-search",
+      "title": "Legal optimization search and Pareto qualification",
+      "source": "04-search.mmd",
+      "render": "04-search.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "5d9e4fc4a54be01aeab4d7a5423c8470aaad34ce1c59bbecbf419f32594c8073"
+    },
+    {
+      "name": "05-runtime",
+      "title": "Stateful order-admission runtime and authority",
+      "source": "05-runtime.mmd",
+      "render": "05-runtime.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "9a0e8082adbe56989f7fe43087537bd15932e57a36677c9dfda03c516603176b"
+    },
+    {
+      "name": "06-verification",
+      "title": "Independent verification, proof scope and release status",
+      "source": "06-verification.mmd",
+      "render": "06-verification.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "9214a88b55c6cee71d9c292ed1993e2f9c84e1d2acd8fb9dcfb34d0d5a3dcb99"
+    },
+    {
+      "name": "07-hardware",
+      "title": "Physical datapath, control plane and measurement boundaries",
+      "source": "07-hardware.mmd",
+      "render": "07-hardware.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "36137e6e2d782652bb3bad51822aeb00d7eabc38dec8ca9967989c11ae2049e0"
+    },
+    {
+      "name": "08-evidence",
+      "title": "Private qualification and evidence custody",
+      "source": "08-evidence.mmd",
+      "render": "08-evidence.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "a179c34369c7150153aef73a5622ff3a79921b4c2f208cbfb7a7c6e1df9de146"
+    },
+    {
+      "name": "09-economics",
+      "title": "Hardware economics and colocation decision model",
+      "source": "09-economics.mmd",
+      "render": "09-economics.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "1fe621d506c6efbe6a43f79899c3df45569ef2d8ff1f7b0ecfb62d17830d193e"
+    },
+    {
+      "name": "10-release",
+      "title": "Release and commercial qualification gates",
+      "source": "10-release.mmd",
+      "render": "10-release.svg",
+      "render_status": "mermaid_cli_success",
+      "svg_sha256": "bd8caeb48f379f47c5405cc1a0b29cf0f4ca937891fe05e7c8fa5c6084376f77"
+    }
+  ],
+  "sources": [
+    {
+      "title": "XLS tools",
+      "url": "https://google.github.io/xls/tools/"
+    },
+    {
+      "title": "XLS IR semantics",
+      "url": "https://google.github.io/xls/ir_semantics/"
+    },
+    {
+      "title": "CIRCT scheduling",
+      "url": "https://circt.llvm.org/docs/Scheduling/"
+    },
+    {
+      "title": "SymbiYosys",
+      "url": "https://symbiyosys.readthedocs.io/en/latest/"
+    },
+    {
+      "title": "Corundum application interfaces",
+      "url": "https://docs.corundum.io/en/latest/modules/mqnic_app_block.html"
+    },
+    {
+      "title": "Exegy nxFramework",
+      "url": "https://www.exegy.com/products/nxframework/"
+    },
+    {
+      "title": "Cisco K3P-S",
+      "url": "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/nexus-smartnic/datasheet-c78-743827.html"
+    },
+    {
+      "title": "AMD U200 / U250 resources",
+      "url": "https://docs.amd.com/r/en-US/ds962-u200-u250/FPGA-Resource-Information"
+    },
+    {
+      "title": "AMD UL3524",
+      "url": "https://www.amd.com/en/products/accelerators/alveo/ul3524/a-ul3524-p16g-pq-g.html"
+    },
+    {
+      "title": "Achronix Speedcore",
+      "url": "https://www.achronix.com/product/speedcore"
+    },
+    {
+      "title": "ASML EUV and DUV layer use",
+      "url": "https://www.asml.com/en/products/euv-lithography-systems"
+    },
+    {
+      "title": "STAC network I/O working group",
+      "url": "https://docs.stacresearch.com/nio"
+    }
+  ],
+  "evidence_policy": "Targets are engineering acceptance proposals. No new hardware measurements, formal proofs, official STAC results, vendor compatibility or commercial agreements are claimed.",
+  "visual_inspection": {
+    "diagrams": [
+      "05-runtime",
+      "08-evidence"
+    ],
+    "result": "Dark cards, white text and no table-row backgrounds verified visually."
+  }
+}

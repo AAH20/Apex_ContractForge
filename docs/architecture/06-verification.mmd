@@ -1,0 +1,29 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#0b1220","primaryColor":"#172554","primaryTextColor":"#ffffff","primaryBorderColor":"#93c5fd","secondaryColor":"#163329","secondaryTextColor":"#ffffff","tertiaryColor":"#292038","tertiaryTextColor":"#ffffff","lineColor":"#cbd5e1","textColor":"#ffffff","edgeLabelBackground":"#0b1220","clusterBkg":"#111827","clusterBorder":"#64748b","fontFamily":"Arial","fontSize":"16px"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
+flowchart TB
+    C["Frozen semantic contract"]:::main
+    OR["Independent manual oracle"]:::check
+    IMP["Generated CPU and RTL"]:::main
+    TR["Deterministic adversarial corpus<br/>Stalls, gaps, overflow, terminal and reset"]:::store
+    DIFF["Differential trace checking<br/>Declared temporal alignment relation"]:::check
+    MUT["Known unsafe mutations<br/>Negative controls must be detected"]:::warn
+    FORM["Formal harness<br/>Exact scope, assumptions and fairness"]:::check
+    PASS["Proved under recorded assumptions"]:::check
+    BND["Bounded: no counterexample<br/>Depth and reduced-model limits explicit"]:::warn
+    FAIL["Counterexample<br/>Minimize and store replay"]:::warn
+    UNK["Timeout or unknown<br/>No proof claim"]:::warn
+    PHY["Separate physical evidence<br/>Timing closure, clocks, CDC, real measurements"]:::check
+    REL["Release matrix<br/>Functional, formal, physical and review axes"]:::store
+    C --> OR
+    C --> FORM
+    OR & IMP & TR --> DIFF
+    MUT --> DIFF & FORM
+    IMP --> FORM
+    FORM --> PASS & BND & FAIL & UNK
+    DIFF & PASS & BND & FAIL & UNK & PHY --> REL
+
+classDef main fill:#172554,stroke:#93c5fd,color:#ffffff,stroke-width:2px;
+classDef check fill:#163329,stroke:#6ee7b7,color:#ffffff,stroke-width:2px;
+classDef warn fill:#422718,stroke:#fdba74,color:#ffffff,stroke-width:2px;
+classDef future fill:#292038,stroke:#c4b5fd,color:#ffffff,stroke-width:2px;
+classDef store fill:#1e293b,stroke:#cbd5e1,color:#ffffff,stroke-width:2px;
+linkStyle default stroke:#cbd5e1,stroke-width:2px;

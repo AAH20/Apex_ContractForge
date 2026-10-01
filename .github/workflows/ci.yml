@@ -1,0 +1,43 @@
+name: Compiler, counter obligations and independent replay
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  qualification:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install native and RTL tools
+        run: sudo apt-get update && sudo apt-get install -y clang iverilog
+      - name: Install tested dependencies and compiler
+        run: |
+          python -m pip install -r requirements-tested.txt
+          python -m pip install --no-build-isolation -e .
+      - run: python -m pytest -q
+      - run: apex-forge check contracts/tick-compatible.json
+      - run: apex-forge prove-counters
+      - name: Regenerate and execute qualification
+        run: |
+          apex-forge qualify --steps 2000 --seeds 17,29,53 --output /tmp/apex-forge-ci
+          apex-forge validate-evidence /tmp/apex-forge-ci
+          apex-forge export-atlas /tmp/apex-forge-ci
+      - name: Check Atlas compatibility at a frozen revision
+        run: |
+          git clone https://github.com/AAH20/Apex_PerfAtlas.git /tmp/apex-forge-atlas
+          git -C /tmp/apex-forge-atlas checkout --detach 53e142cf8234d389226ce6e6113cade8168400a6
+          python -m pip install --no-build-isolation --no-deps /tmp/apex-forge-atlas
+          apex-atlas validate /tmp/apex-forge-ci/run.json
+      - name: Build distributable packages
+        run: python -m build --no-isolation
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qualification-python-${{ matrix.python }}
+          path: /tmp/apex-forge-ci
+          if-no-files-found: error

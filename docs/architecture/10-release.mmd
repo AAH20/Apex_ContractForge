@@ -1,0 +1,19 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#0b1220","primaryColor":"#172554","primaryTextColor":"#ffffff","primaryBorderColor":"#93c5fd","secondaryColor":"#163329","secondaryTextColor":"#ffffff","tertiaryColor":"#292038","tertiaryTextColor":"#ffffff","lineColor":"#cbd5e1","textColor":"#ffffff","edgeLabelBackground":"#0b1220","clusterBkg":"#111827","clusterBorder":"#64748b","fontFamily":"Arial","fontSize":"16px"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
+flowchart TB
+    R0["R0 Semantics<br/>Contract, independent oracle, fault corpus"]:::main
+    R1["R1 Executable compiler<br/>Generated C++ and RTL, fixed commit schedule"]:::main
+    R2["R2 Qualified optimization<br/>Reject unsafe transforms, publish measured tradeoff"]:::check
+    R3["R3 One commercial FPGA<br/>Shell integration, P&R, calibrated wire replay"]:::check
+    R4["R4 Private workload engagement<br/>Frozen baseline and contractual acceptance"]:::main
+    R5["R5 Second board and licensed environment<br/>Independent repeat and maintenance evidence"]:::main
+    R6["Optional later substrate program<br/>eFPGA / hybrid / ASIC with access and economics"]:::future
+    STOP["Gate missed<br/>Publish limitation or repair before advancing"]:::warn
+    R0 --> R1 --> R2 --> R3 --> R4 --> R5 --> R6
+    R1 & R2 & R3 & R4 & R5 -->|required evidence missing| STOP
+
+classDef main fill:#172554,stroke:#93c5fd,color:#ffffff,stroke-width:2px;
+classDef check fill:#163329,stroke:#6ee7b7,color:#ffffff,stroke-width:2px;
+classDef warn fill:#422718,stroke:#fdba74,color:#ffffff,stroke-width:2px;
+classDef future fill:#292038,stroke:#c4b5fd,color:#ffffff,stroke-width:2px;
+classDef store fill:#1e293b,stroke:#cbd5e1,color:#ffffff,stroke-width:2px;
+linkStyle default stroke:#cbd5e1,stroke-width:2px;

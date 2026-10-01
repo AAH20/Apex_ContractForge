@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AAH20/Apex_ContractForge/contracts/contract.schema.json",
+  "title": "Frozen Tick-compatible ContractForge v0 contract",
+  "const": {
+    "schema_version": "0.1.0",
+    "id": "apex.forge.tick-compatible",
+    "version": "0.1.0",
+    "semantic_profile": "apex.tick.open@0.1.0",
+    "bounds": {
+      "instruments": 8,
+      "pending_entries": 16,
+      "registered_outputs": 1,
+      "window_cycles": 64
+    },
+    "input_widths": {
+      "sequence": 64,
+      "terminal_id": 64,
+      "instrument": 16,
+      "price": 32,
+      "quantity": 32,
+      "epoch": 32,
+      "exposure_limit": 64,
+      "rate_limit": 32
+    },
+    "arithmetic": {
+      "signed_fields": false,
+      "quantity_sum": "65-bit guard; reachable exposure bounded by sixteen u32 quantities",
+      "identity_and_sequence_wrap": "hold before wrap"
+    },
+    "time": {
+      "unit": "core_cycle",
+      "advance_on_idle_and_stall": true,
+      "physical_clock_period_ns": null
+    },
+    "phase_order": [
+      "reset overrides normal transition",
+      "sample input readiness from pre-state",
+      "complete previous output handshake",
+      "advance every-cycle rate window",
+      "recovery else terminal else accepted quote",
+      "observe post-state"
+    ],
+    "authority": {
+      "initial": "held",
+      "recover": "held, zero exposure, empty output, newer epoch, positive quantity/limit/rate/sequence",
+      "hard_reset": "host must reconcile external obligations",
+      "already_reserved_output_during_hold": "preserve reference handshake policy"
+    },
+    "boundaries": {
+      "input": "normalized trusted frame_ok and integer fields",
+      "output": "registered simulated order fields",
+      "terminal_epoch_field": false
+    },
+    "reference": {
+      "repository": "https://github.com/AAH20/Apex_Tick",
+      "commit": "1b665d3a0ec1fc106525edcece8a43b7254244e1",
+      "license": "Apache-2.0",
+      "files": {
+        "oracle.py": {
+          "upstream_path": "src/apex_tick/oracle.py",
+          "sha256": "d10bbd91505d17ae51e6e0a512ea3f209ebba279e379bea957660fdaa0093e60"
+        },
+        "apex_tick_core.sv": {
+          "upstream_path": "rtl/apex_tick_core.sv",
+          "sha256": "576cb20a09a693facc705e843c5fabc81868e84a336d2020b1d24944c0996b12"
+        }
+      }
+    },
+    "rights": "public_redistributable"
+  }
+}

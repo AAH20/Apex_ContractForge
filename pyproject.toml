@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apex-contractforge"
+version = "0.1.0"
+description = "Bounded Tick-profile transition compiler with independent CPU/RTL qualification"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+readme = "README.md"
+authors = [{name = "Ahmed Hassan"}]
+
+[project.optional-dependencies]
+qualification = ["z3-solver>=4.13,<5"]
+test = ["pytest>=8,<10", "jsonschema>=4.22,<5", "build>=1,<2", "z3-solver>=4.13,<5"]
+
+[project.scripts]
+apex-forge = "apex_forge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+apex_forge = ["data/*.json", "templates/*.in", "reference/*.py", "reference/*.sv", "reference/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
