@@ -1,0 +1,4 @@
+include requirements-tested.txt
+recursive-include contracts *.json
+recursive-include docs *.md *.mmd *.svg *.html *.json
+recursive-include tests *.py

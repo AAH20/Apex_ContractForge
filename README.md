@@ -41,6 +41,8 @@ python3 -m venv .venv
 
 Output directories must be absent or empty; existing evidence is not overwritten. `export-atlas` writes a new `run.json` once. To check it with [Apex_PerfAtlas](https://github.com/AAH20/Apex_PerfAtlas), run `apex-atlas validate /tmp/apex-forge-run/run.json` in an Atlas environment.
 
+Valid measured Atlas exports require an observed source revision and dirty state from the ContractForge checkout. A standalone wheel can generate and qualify the profile; without checkout provenance it retains a null source revision and cannot label an Atlas record valid measured.
+
 The randomized budget is at most one million cycles per qualification invocation, plus the deterministic corpus and scenario resets. Counts describe replay cycles, including idle, stalls and reset—not packets, orders or physical throughput. The testbench's artificial clock is not a device frequency measurement.
 
 ## Actual v0 execution architecture
