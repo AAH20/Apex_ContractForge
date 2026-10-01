@@ -1,7 +1,7 @@
 import pytest
 from apex_forge.oracle import Reference, event, normalize_row, validate_event
 from apex_forge.corpus import U32, U64, scenarios, random_events
-from apex_forge.proofs import require_counter_proof
+from apex_forge.proofs import require_counter_proof, same_proof
 
 
 def model():
@@ -60,6 +60,15 @@ def test_full_domain_local_counter_proofs():
     assert len(result["obligations"]) == 4
     assert all(x["status"] == "proved_under_assumptions" for x in result["obligations"])
     assert result["rtl_stateful_equivalence"] == "not_proved"
+
+
+def test_printer_local_names_are_not_query_identity():
+    import copy
+    first = require_counter_proof(); second = require_counter_proof()
+    assert same_proof(first, second)
+    substituted = copy.deepcopy(first)
+    substituted["obligations"][0]["query_smt2"] = "(assert false)"
+    assert not same_proof(substituted, second)
 
 
 @pytest.mark.parametrize("value", [event(), event(valid=1)])

@@ -44,3 +44,26 @@ def require_counter_proof(timeout_ms=5000):
     if len(obligations) != 4 or {x.get("id") for x in obligations} != required or any(x.get("status") != "proved_under_assumptions" for x in obligations):
         raise RuntimeError("counter narrowing blocked: required SMT result is not proved")
     return report
+
+
+def same_proof(left, right):
+    """Compare expanded query ASTs; printer-local let names are not semantic identity.
+
+    Structural equality is intentional: comparing logical equivalence would accept
+    any substituted unsatisfiable query, including a trivial assertion of false.
+    """
+    import z3
+    if {k: v for k, v in left.items() if k != "obligations"} != {k: v for k, v in right.items() if k != "obligations"}:
+        return False
+    if len(left["obligations"]) != len(right["obligations"]):
+        return False
+    try:
+        for a, b in zip(left["obligations"], right["obligations"]):
+            if {k: v for k, v in a.items() if k != "query_smt2"} != {k: v for k, v in b.items() if k != "query_smt2"}:
+                return False
+            parsed_a, parsed_b = z3.parse_smt2_string(a["query_smt2"]), z3.parse_smt2_string(b["query_smt2"])
+            if len(parsed_a) != len(parsed_b) or not all(z3.eq(x, y) for x, y in zip(parsed_a, parsed_b)):
+                return False
+    except z3.Z3Exception:
+        return False
+    return True

@@ -9,7 +9,7 @@ from contextlib import ExitStack
 from .compiler import MUTATIONS, sha, generate
 from .contract import load, digest
 from .oracle import Reference, normalize_row, parse_event
-from .proofs import require_counter_proof
+from .proofs import require_counter_proof, same_proof
 
 
 def write_manifest(root):
@@ -54,7 +54,7 @@ def validate_evidence(root):
         if {x["id"] for x in obligations} != required or len(obligations) != 4 or any(x["status"] != "proved_under_assumptions" for x in obligations):
             raise ValueError("missing, duplicated or unresolved local proof obligation")
         regenerated_proof = require_counter_proof(proofs["timeout_ms"])
-        if proofs != regenerated_proof:
+        if not same_proof(proofs, regenerated_proof):
             raise ValueError("retained proof does not match regenerated obligations, assumptions and solver")
         # Regenerate source from the supported contract; never execute customer-supplied code.
         for variant in ("baseline", "narrow-counters"):
@@ -65,7 +65,13 @@ def validate_evidence(root):
                 expected, expected_ir, expected_lineage = generate(contract, backend, variant)
                 if (root / "generated" / variant / f"core.{suffix}").read_text() != expected:
                     raise ValueError("generated source does not match frozen compiler semantics")
-                if metadata["ir"] != expected_ir or metadata["lineage"] != expected_lineage:
+                old_lineage = metadata["lineage"]
+                lineage_matches = {k: v for k, v in old_lineage.items() if k != "proof"} == {k: v for k, v in expected_lineage.items() if k != "proof"}
+                if expected_lineage["proof"] is None:
+                    lineage_matches = lineage_matches and old_lineage["proof"] is None
+                else:
+                    lineage_matches = lineage_matches and same_proof(old_lineage["proof"], expected_lineage["proof"])
+                if metadata["ir"] != expected_ir or not lineage_matches:
                     raise ValueError("generated manifest does not match source semantics and proof scope")
                 generated = {x["path"]: x["sha256"] for x in metadata["generated"]}
                 if generated.get(f"core.{suffix}") != sha(root / "generated" / variant / f"core.{suffix}"):
