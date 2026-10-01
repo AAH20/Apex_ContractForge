@@ -1,0 +1,394 @@
+{
+  "compiler_version": "0.1.0",
+  "contract_sha256": "fe33c31756db1ef541bd72835d75eb7e3d5ddbbde864ae16cd57a2ff74d320b4",
+  "generated": [
+    {
+      "path": "core.cpp",
+      "sha256": "0432e18c597c19adc63c432e8e5d6771ed41ad35f4644711cbfdc3fd657481d4"
+    },
+    {
+      "path": "core.sv",
+      "sha256": "b00b3cff5e957fb6de13367ccadbd9a182839c6eee72b9a29bd5913804b11750"
+    }
+  ],
+  "template_sha256": {
+    "cpp": "4b38d2fb5410c61a0b51198a6fd302a12ddcbaf13a441da466c2c19d83fe6b5e",
+    "sv": "82ef19e4c2c3319afcfaa5fe159a7ed7a8209ce52110e02bfd4f65311e451532"
+  },
+  "ir": {
+    "ir_version": "0.1.0",
+    "contract_sha256": "fe33c31756db1ef541bd72835d75eb7e3d5ddbbde864ae16cd57a2ff74d320b4",
+    "guards": {
+      "invalid_fields": {
+        "op": "or",
+        "bits": 1,
+        "args": [
+          {
+            "op": "not",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 1,
+                "args": [
+                  "frame_ok"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "ne",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "input_epoch"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "epoch"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "ge",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 16,
+                "args": [
+                  "instrument"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 16,
+                "args": [
+                  8
+                ]
+              }
+            ]
+          },
+          {
+            "op": "eq",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "price"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 32,
+                "args": [
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "op": "eq",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "quantity"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 32,
+                "args": [
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "duplicate_sequence": {
+        "op": "lt",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ref",
+            "bits": 64,
+            "args": [
+              "sequence"
+            ]
+          },
+          {
+            "op": "ref",
+            "bits": 64,
+            "args": [
+              "expected"
+            ]
+          }
+        ]
+      },
+      "sequence_gap": {
+        "op": "or",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ne",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "sequence"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "expected"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "eq",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "expected"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 64,
+                "args": [
+                  18446744073709551615
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "strategy_reject": {
+        "op": "or",
+        "bits": 1,
+        "args": [
+          {
+            "op": "gt",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "price"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "threshold"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "lt",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "quantity"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "order_quantity"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "rate_reject": {
+        "op": "ge",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ref",
+            "bits": 32,
+            "args": [
+              "effective_rate"
+            ]
+          },
+          {
+            "op": "ref",
+            "bits": 32,
+            "args": [
+              "rate_limit"
+            ]
+          }
+        ]
+      },
+      "exposure_reject": {
+        "op": "gt",
+        "bits": 1,
+        "args": [
+          {
+            "op": "add_widened",
+            "bits": 65,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "exposure"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "order_quantity"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "zero_extend",
+            "bits": 65,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "max_exposure"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "identity_exhausted": {
+        "op": "eq",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ref",
+            "bits": 64,
+            "args": [
+              "next_id"
+            ]
+          },
+          {
+            "op": "const",
+            "bits": 64,
+            "args": [
+              18446744073709551615
+            ]
+          }
+        ]
+      }
+    },
+    "exposure_sum": {
+      "op": "add_widened",
+      "bits": 65,
+      "args": [
+        {
+          "op": "ref",
+          "bits": 64,
+          "args": [
+            "exposure"
+          ]
+        },
+        {
+          "op": "ref",
+          "bits": 32,
+          "args": [
+            "order_quantity"
+          ]
+        }
+      ]
+    },
+    "effects": [
+      "reset overrides normal transition",
+      "sample readiness from pre-state",
+      "complete previous output handshake",
+      "advance every-cycle window",
+      "recovery else terminal else accepted quote",
+      "observe post-state"
+    ],
+    "rate_bits": 7,
+    "window_bits": 6,
+    "stateful_commit_schedule": "fixed; no retiming",
+    "negative_control_mutation": null
+  },
+  "lineage": {
+    "variant": "narrow-counters",
+    "mutation": null,
+    "negative_control": false,
+    "stateful_retiming": false,
+    "rate_logical_bits": 7,
+    "window_logical_bits": 6,
+    "rtl_declared_counter_bits_saved": 51,
+    "physical_area_reduction": null,
+    "proof": {
+      "solver": "Z3",
+      "solver_version": "4.16.0",
+      "timeout_ms": 5000,
+      "scope": "32-bit local counter transition and inductive invariant; accept/recover are unconstrained Boolean inputs",
+      "assumptions": [
+        "window starts at zero",
+        "rate starts at zero",
+        "window advances every non-reset cycle",
+        "at most one reservation per cycle",
+        "rollover precedes reservation",
+        "recovery resets both counters"
+      ],
+      "rtl_stateful_equivalence": "not_proved",
+      "physical_timing": "not_measured",
+      "obligations": [
+        {
+          "id": "reset_initialization",
+          "status": "proved_under_assumptions",
+          "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(assert\n (not (and (bvult (_ bv0 32) (_ bv64 32)) (bvule (_ bv0 32) (_ bv1 32)))))\n(check-sat)\n"
+        },
+        {
+          "id": "counter_invariant_inductive_step",
+          "status": "proved_under_assumptions",
+          "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun window () (_ BitVec 32))\n(declare-fun recover () Bool)\n(declare-fun rate () (_ BitVec 32))\n(declare-fun accept () Bool)\n(assert\n (let ((?x15 (ite recover (_ bv0 32) (ite (= window (_ bv63 32)) (_ bv0 32) (bvadd window (_ bv1 32))))))\n(let (($x10 (= window (_ bv63 32))))\n(let ((?x97 (ite $x10 (_ bv0 32) rate)))\n(let ((?x94 (ite recover (_ bv0 32) (ite accept (bvadd ?x97 (_ bv1 32)) ?x97))))\n(let (($x23 (and (bvult window (_ bv64 32)) (bvule rate (bvadd window (_ bv1 32))))))\n(and $x23 (not (and (bvult ?x15 (_ bv64 32)) (bvule ?x94 (bvadd ?x15 (_ bv1 32))))))))))))\n(check-sat)\n"
+        },
+        {
+          "id": "rate_7bit_preserves_value",
+          "status": "proved_under_assumptions",
+          "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun rate () (_ BitVec 32))\n(declare-fun window () (_ BitVec 32))\n(declare-fun accept () Bool)\n(declare-fun recover () Bool)\n(assert\n (let (($x10 (= window (_ bv63 32))))\n(let ((?x97 (ite $x10 (_ bv0 32) rate)))\n(let ((?x94 (ite recover (_ bv0 32) (ite accept (bvadd ?x97 (_ bv1 32)) ?x97))))\n(let (($x23 (and (bvult window (_ bv64 32)) (bvule rate (bvadd window (_ bv1 32))))))\n(and $x23 (and (distinct ((_ zero_extend 25) ((_ extract 6 0) ?x94)) ?x94) true)))))))\n(check-sat)\n"
+        },
+        {
+          "id": "window_6bit_preserves_value",
+          "status": "proved_under_assumptions",
+          "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun window () (_ BitVec 32))\n(declare-fun recover () Bool)\n(declare-fun rate () (_ BitVec 32))\n(assert\n (let ((?x15 (ite recover (_ bv0 32) (ite (= window (_ bv63 32)) (_ bv0 32) (bvadd window (_ bv1 32))))))\n(let (($x23 (and (bvult window (_ bv64 32)) (bvule rate (bvadd window (_ bv1 32))))))\n(and $x23 (and (distinct ((_ zero_extend 26) ((_ extract 5 0) ?x15)) ?x15) true)))))\n(check-sat)\n"
+        }
+      ]
+    }
+  }
+}

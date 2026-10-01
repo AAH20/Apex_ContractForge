@@ -1,0 +1,20 @@
+{
+  "seeds": [
+    17,
+    29,
+    53,
+    71,
+    97,
+    113,
+    131,
+    149,
+    167,
+    191
+  ],
+  "steps_per_seed": 100000,
+  "profile": "apex.forge.tick-compatible",
+  "variants": [
+    "baseline",
+    "narrow-counters"
+  ]
+}

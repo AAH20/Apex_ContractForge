@@ -1,0 +1,38 @@
+{
+  "solver": "Z3",
+  "solver_version": "4.16.0",
+  "timeout_ms": 5000,
+  "scope": "32-bit local counter transition and inductive invariant; accept/recover are unconstrained Boolean inputs",
+  "assumptions": [
+    "window starts at zero",
+    "rate starts at zero",
+    "window advances every non-reset cycle",
+    "at most one reservation per cycle",
+    "rollover precedes reservation",
+    "recovery resets both counters"
+  ],
+  "rtl_stateful_equivalence": "not_proved",
+  "physical_timing": "not_measured",
+  "obligations": [
+    {
+      "id": "reset_initialization",
+      "status": "proved_under_assumptions",
+      "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(assert\n (not (and (bvult (_ bv0 32) (_ bv64 32)) (bvule (_ bv0 32) (_ bv1 32)))))\n(check-sat)\n"
+    },
+    {
+      "id": "counter_invariant_inductive_step",
+      "status": "proved_under_assumptions",
+      "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun window () (_ BitVec 32))\n(declare-fun recover () Bool)\n(declare-fun rate () (_ BitVec 32))\n(declare-fun accept () Bool)\n(assert\n (let ((?x15 (ite recover (_ bv0 32) (ite (= window (_ bv63 32)) (_ bv0 32) (bvadd window (_ bv1 32))))))\n(let (($x10 (= window (_ bv63 32))))\n(let ((?x16 (ite $x10 (_ bv0 32) rate)))\n(let ((?x19 (ite recover (_ bv0 32) (ite accept (bvadd ?x16 (_ bv1 32)) ?x16))))\n(let (($x23 (and (bvult window (_ bv64 32)) (bvule rate (bvadd window (_ bv1 32))))))\n(and $x23 (not (and (bvult ?x15 (_ bv64 32)) (bvule ?x19 (bvadd ?x15 (_ bv1 32))))))))))))\n(check-sat)\n"
+    },
+    {
+      "id": "rate_7bit_preserves_value",
+      "status": "proved_under_assumptions",
+      "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun rate () (_ BitVec 32))\n(declare-fun window () (_ BitVec 32))\n(declare-fun accept () Bool)\n(declare-fun recover () Bool)\n(assert\n (let (($x10 (= window (_ bv63 32))))\n(let ((?x16 (ite $x10 (_ bv0 32) rate)))\n(let ((?x19 (ite recover (_ bv0 32) (ite accept (bvadd ?x16 (_ bv1 32)) ?x16))))\n(let (($x23 (and (bvult window (_ bv64 32)) (bvule rate (bvadd window (_ bv1 32))))))\n(and $x23 (and (distinct ((_ zero_extend 25) ((_ extract 6 0) ?x19)) ?x19) true)))))))\n(check-sat)\n"
+    },
+    {
+      "id": "window_6bit_preserves_value",
+      "status": "proved_under_assumptions",
+      "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun window () (_ BitVec 32))\n(declare-fun recover () Bool)\n(declare-fun rate () (_ BitVec 32))\n(assert\n (let ((?x15 (ite recover (_ bv0 32) (ite (= window (_ bv63 32)) (_ bv0 32) (bvadd window (_ bv1 32))))))\n(let (($x23 (and (bvult window (_ bv64 32)) (bvule rate (bvadd window (_ bv1 32))))))\n(and $x23 (and (distinct ((_ zero_extend 26) ((_ extract 5 0) ?x15)) ?x15) true)))))\n(check-sat)\n"
+    }
+  ]
+}

@@ -1,0 +1,357 @@
+{
+  "compiler_version": "0.1.0",
+  "contract_sha256": "fe33c31756db1ef541bd72835d75eb7e3d5ddbbde864ae16cd57a2ff74d320b4",
+  "generated": [
+    {
+      "path": "core.cpp",
+      "sha256": "be65fe65047bcdeeec0a8db9231030d0771127105566fed911a3721fe907b9b1"
+    },
+    {
+      "path": "core.sv",
+      "sha256": "1612592d47845b9bee1827aa6bd7c1fef657bee18b34511cfb4789824043c20a"
+    }
+  ],
+  "template_sha256": {
+    "cpp": "4b38d2fb5410c61a0b51198a6fd302a12ddcbaf13a441da466c2c19d83fe6b5e",
+    "sv": "82ef19e4c2c3319afcfaa5fe159a7ed7a8209ce52110e02bfd4f65311e451532"
+  },
+  "ir": {
+    "ir_version": "0.1.0",
+    "contract_sha256": "fe33c31756db1ef541bd72835d75eb7e3d5ddbbde864ae16cd57a2ff74d320b4",
+    "guards": {
+      "invalid_fields": {
+        "op": "or",
+        "bits": 1,
+        "args": [
+          {
+            "op": "not",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 1,
+                "args": [
+                  "frame_ok"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "ne",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "input_epoch"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "epoch"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "ge",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 16,
+                "args": [
+                  "instrument"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 16,
+                "args": [
+                  8
+                ]
+              }
+            ]
+          },
+          {
+            "op": "eq",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "price"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 32,
+                "args": [
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "op": "eq",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "quantity"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 32,
+                "args": [
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "duplicate_sequence": {
+        "op": "lt",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ref",
+            "bits": 64,
+            "args": [
+              "sequence"
+            ]
+          },
+          {
+            "op": "ref",
+            "bits": 64,
+            "args": [
+              "expected"
+            ]
+          }
+        ]
+      },
+      "sequence_gap": {
+        "op": "or",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ne",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "sequence"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "expected"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "eq",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "expected"
+                ]
+              },
+              {
+                "op": "const",
+                "bits": 64,
+                "args": [
+                  18446744073709551615
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "strategy_reject": {
+        "op": "or",
+        "bits": 1,
+        "args": [
+          {
+            "op": "gt",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "price"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "threshold"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "lt",
+            "bits": 1,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "quantity"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "order_quantity"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "rate_reject": {
+        "op": "ge",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ref",
+            "bits": 32,
+            "args": [
+              "effective_rate"
+            ]
+          },
+          {
+            "op": "ref",
+            "bits": 32,
+            "args": [
+              "rate_limit"
+            ]
+          }
+        ]
+      },
+      "exposure_reject": {
+        "op": "gt",
+        "bits": 1,
+        "args": [
+          {
+            "op": "add_widened",
+            "bits": 65,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "exposure"
+                ]
+              },
+              {
+                "op": "ref",
+                "bits": 32,
+                "args": [
+                  "order_quantity"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "zero_extend",
+            "bits": 65,
+            "args": [
+              {
+                "op": "ref",
+                "bits": 64,
+                "args": [
+                  "max_exposure"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "identity_exhausted": {
+        "op": "eq",
+        "bits": 1,
+        "args": [
+          {
+            "op": "ref",
+            "bits": 64,
+            "args": [
+              "next_id"
+            ]
+          },
+          {
+            "op": "const",
+            "bits": 64,
+            "args": [
+              18446744073709551615
+            ]
+          }
+        ]
+      }
+    },
+    "exposure_sum": {
+      "op": "add_widened",
+      "bits": 65,
+      "args": [
+        {
+          "op": "ref",
+          "bits": 64,
+          "args": [
+            "exposure"
+          ]
+        },
+        {
+          "op": "ref",
+          "bits": 32,
+          "args": [
+            "order_quantity"
+          ]
+        }
+      ]
+    },
+    "effects": [
+      "reset overrides normal transition",
+      "sample readiness from pre-state",
+      "complete previous output handshake",
+      "advance every-cycle window",
+      "recovery else terminal else accepted quote",
+      "observe post-state"
+    ],
+    "rate_bits": 32,
+    "window_bits": 32,
+    "stateful_commit_schedule": "fixed; no retiming",
+    "negative_control_mutation": "terminal_over_recovery"
+  },
+  "lineage": {
+    "variant": "baseline",
+    "mutation": "terminal_over_recovery",
+    "negative_control": true,
+    "stateful_retiming": false,
+    "rate_logical_bits": 32,
+    "window_logical_bits": 32,
+    "rtl_declared_counter_bits_saved": 0,
+    "physical_area_reduction": null,
+    "proof": null
+  }
+}

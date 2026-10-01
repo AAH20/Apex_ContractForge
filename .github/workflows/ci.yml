@@ -23,6 +23,8 @@ jobs:
       - run: python -m pytest -q
       - run: apex-forge check contracts/tick-compatible.json
       - run: apex-forge prove-counters
+      - name: Independently replay retained qualification evidence
+        run: apex-forge validate-evidence evidence/functional/2026-10-01
       - name: Regenerate and execute qualification
         run: |
           apex-forge qualify --steps 2000 --seeds 17,29,53 --output /tmp/apex-forge-ci
@@ -34,6 +36,7 @@ jobs:
           git -C /tmp/apex-forge-atlas checkout --detach 53e142cf8234d389226ce6e6113cade8168400a6
           python -m pip install --no-build-isolation --no-deps /tmp/apex-forge-atlas
           apex-atlas validate /tmp/apex-forge-ci/run.json
+          apex-atlas validate evidence/functional/2026-10-01/run.json
       - name: Build distributable packages
         run: python -m build --no-isolation
       - uses: actions/upload-artifact@v4

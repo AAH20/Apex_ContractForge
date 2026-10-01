@@ -1,0 +1,127 @@
+[
+  {
+    "name": "strategy_and_quantity",
+    "start_cycle": 0,
+    "cycles": 4
+  },
+  {
+    "name": "stall_and_unsent_terminal",
+    "start_cycle": 4,
+    "cycles": 8
+  },
+  {
+    "name": "same_cycle_tx_and_terminal",
+    "start_cycle": 12,
+    "cycles": 4
+  },
+  {
+    "name": "duplicate_terminal",
+    "start_cycle": 16,
+    "cycles": 6
+  },
+  {
+    "name": "corrupt_duplicate_priority",
+    "start_cycle": 22,
+    "cycles": 4
+  },
+  {
+    "name": "gap_and_hold",
+    "start_cycle": 26,
+    "cycles": 6
+  },
+  {
+    "name": "epoch_validation",
+    "start_cycle": 32,
+    "cycles": 3
+  },
+  {
+    "name": "idle_window_rollover",
+    "start_cycle": 35,
+    "cycles": 68
+  },
+  {
+    "name": "wide_quantity_accounting",
+    "start_cycle": 103,
+    "cycles": 8
+  },
+  {
+    "name": "ledger_capacity_and_reuse",
+    "start_cycle": 111,
+    "cycles": 21
+  },
+  {
+    "name": "sequence_exhaustion",
+    "start_cycle": 132,
+    "cycles": 3
+  },
+  {
+    "name": "reset_with_unknown_obligation",
+    "start_cycle": 135,
+    "cycles": 6
+  },
+  {
+    "name": "conflicting_recovery_and_terminal",
+    "start_cycle": 141,
+    "cycles": 2
+  },
+  {
+    "name": "exposure_limit",
+    "start_cycle": 143,
+    "cycles": 4
+  },
+  {
+    "name": "invalid_recovery_and_strategy",
+    "start_cycle": 147,
+    "cycles": 5
+  },
+  {
+    "name": "random-seed-17",
+    "start_cycle": 152,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-29",
+    "start_cycle": 100153,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-53",
+    "start_cycle": 200154,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-71",
+    "start_cycle": 300155,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-97",
+    "start_cycle": 400156,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-113",
+    "start_cycle": 500157,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-131",
+    "start_cycle": 600158,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-149",
+    "start_cycle": 700159,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-167",
+    "start_cycle": 800160,
+    "cycles": 100001
+  },
+  {
+    "name": "random-seed-191",
+    "start_cycle": 900161,
+    "cycles": 100001
+  }
+]

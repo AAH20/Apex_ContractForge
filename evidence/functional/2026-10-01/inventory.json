@@ -1,0 +1,10 @@
+{
+  "environment": "native functional replay and Icarus RTL simulation",
+  "host_machine": "arm64",
+  "host_system": "Darwin",
+  "python_version": "3.12.10",
+  "cpu_model": null,
+  "cxx_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "iverilog_version": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "physical_board": null
+}

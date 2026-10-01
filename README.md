@@ -105,6 +105,15 @@ This project has no implemented Exegy adapter, exchange session, MAC/PHY, physic
 
 Retained releases live under `evidence/`. Run `apex-forge validate-evidence EVIDENCE_DIRECTORY` to replay the retained observations against the independent oracle and check source identity, count accounting and counterexample bindings. The evidence manifest establishes byte identity and local consistency, not authenticated custody or independent review.
 
+The [2026-10-01 retained qualification](evidence/functional/2026-10-01/qualification.json) passed **1,000,162 cycles per backend**, with **5,000,810 matching backend transitions** across the five executions. This includes one million randomized cycles over ten seeds, fifteen named scenarios and scenario resets. All **14 negative-control checks** detected their intended fault. Ninety normalized observation fields were compared per cycle; the compact Atlas trace retains ten public fields. The [source provenance](evidence/functional/2026-10-01/provenance.json) records clean revision `b2e9d3eeb5c9b13a1e020c29bfb3d777a1a17722`; the [tool inventory](evidence/functional/2026-10-01/inventory.json) records native arm64 Darwin replay and Icarus simulation, with no physical board.
+
+The [Atlas record](evidence/functional/2026-10-01/run.json) passes Apex_PerfAtlas validation at revision `53e142cf8234d389226ce6e6113cade8168400a6`. Its measured quantity is the functional cycle count, not elapsed time or trading latency. Its metric uses the per-backend population, not the five-backend aggregate. Thirty-five compiler/evidence tests pass at the recorded source revision. Source and wheel qualification were both exercised; the release packages include templates, reference provenance and the frozen contract.
+
+```sh
+apex-forge validate-evidence evidence/functional/2026-10-01
+apex-atlas validate evidence/functional/2026-10-01/run.json
+```
+
 The four local SMT obligations establish a counter invariant and narrowing value preservation under recorded transition assumptions. They do **not** prove the entire generated RTL state machine, the compiler, board integration, exchange correctness or physical timing.
 
 ## License and provenance

@@ -17,4 +17,6 @@
 
 The architecture directory describes the broader proposal. It is not a diagrammatic claim that every component is running. The README's v0 execution diagram identifies the implemented path.
 
+The retained 2026-10-01 run checks 1,000,162 cycles per backend (5,000,810 backend transitions) against the independent oracle, over ten randomized seeds and fifteen named scenarios. All fourteen required negative-control checks pass. The source revision, raw compressed traces, inputs, tool inventory, four local SMT queries and simulation-only Atlas record are retained under `evidence/functional/2026-10-01/`. This satisfies the finite replay gate for the frozen profile; it does not satisfy R2 or R3.
+
 Research objectives include twenty known mutation controls, additional contract profiles, and a reproducible performance/area tradeoff. An exploratory 20% application-area or 10% CPU-tail improvement is a target, not an estimate or current result. The 51-bit source declaration change alone does not satisfy the measured-optimization gate.
